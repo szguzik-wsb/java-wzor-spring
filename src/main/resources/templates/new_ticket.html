@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj nowe zgłoszenie</title>
+</head>
+<body>
+<h1>Dodaj nowe zgłoszenie</h1>
+<form action="#" th:action="@{/tickets}" th:object="${ticket}" method="post">
+    <p>Tytuł: <input type="text" th:field="*{title}" /></p>
+    <p>Opis: <input type="text" th:field="*{description}" /></p>
+    <p>Status: <input type="text" th:field="*{status}" /></p>
+    <p><input type="submit" value="Zapisz" /></p>
+</form>
+</body>
+</html>

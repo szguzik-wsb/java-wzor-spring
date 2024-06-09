@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Helpdesk</title>
+</head>
+<body>
+<h1>Lista zgłoszeń</h1>
+<a href="/tickets/new">Dodaj nowe zgłoszenie</a>
+<!-- Formularz wylogowania widoczny tylko dla zalogowanych użytkowników -->
+<div sec:authorize="isAuthenticated()">
+    <form id="logoutForm" action="/logout" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <button type="submit">Wyloguj</button>
+    </form>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Tytuł</th>
+            <th>Opis</th>
+            <th>Status</th>
+            <th>Akcje</th>
+        </tr>
+        <tr th:each="ticket : ${listTickets}">
+            <td th:text="${ticket.id}"></td>
+            <td th:text="${ticket.title}"></td>
+            <td th:text="${ticket.description}"></td>
+            <td th:text="${ticket.status}"></td>
+            <td>
+                <a th:href="@{/tickets/edit/{id}(id=${ticket.id})}">Edytuj</a>
+                <a th:href="@{/tickets/delete/{id}(id=${ticket.id})}">Usuń</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
